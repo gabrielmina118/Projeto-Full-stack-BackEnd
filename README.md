@@ -1,4 +1,4 @@
-# Projeto-Full-stack 
+# Projeto-Full-stack :technologist: Gabriel Mina
 ## Stacks utilizadas
 ### - React
 ### - Node.js
