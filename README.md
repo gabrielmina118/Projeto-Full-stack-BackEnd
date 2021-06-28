@@ -22,3 +22,4 @@
 ### :heavy_check_mark: front: AWS e o Heroku.
 ### :heavy_check_mark: back : SURGE
 
+### link trello - https://trello.com/b/UOg2eemv/projeto-full-stack
