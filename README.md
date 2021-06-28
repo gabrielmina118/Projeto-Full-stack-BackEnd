@@ -2,22 +2,23 @@
 ## Stacks utilizadas
 ### - React
 ### - Node.js
+### - MySql
 
 ## BackEnd
 
-### - Autenticação
-### - Criação de música ou imagem
-### - Leitura de música ou imagem
+### :heavy_check_mark: Autenticação
+### :heavy_check_mark: Criação de música ou imagem
+### :heavy_check_mark: Leitura de música ou imagem
 
 ## FrontEnd
 
-### - Tela de cadastro 
-### - Tela de Login
-### - Tela de criação de música ou imagem 
-### - Tela para ver itens
+### :heavy_check_mark: Tela de cadastro 
+### :heavy_check_mark: Tela de Login
+### :heavy_check_mark: Tela de criação de música ou imagem 
+### :heavy_check_mark: Tela para ver itens
 
 ## Infraestrutura
 
-### - front: AWS e o Heroku.
-### - back : SURGE
+### :heavy_check_mark: front: AWS e o Heroku.
+### :heavy_check_mark: back : SURGE
 
