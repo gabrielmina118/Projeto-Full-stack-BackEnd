@@ -30,7 +30,6 @@ export class UserDatabase extends BaseDatabase {
     }
 
     public async getUser(emailNick:string):Promise<User>{
-        console.log(emailNick);
         
         const result = await this.getConnection()
         .select("*")
