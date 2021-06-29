@@ -43,7 +43,8 @@ export class User {
         }
     }
 
-    static toUserModel(user: any): User | undefined {
+    static toUserModel(user: any): User {
+        
         return new User(user.id, user.name, user.nickname, user.email, user.password, User.stringToUserRole(user.role));
     }
 }
@@ -56,8 +57,7 @@ export interface UserInputDTO {
 }
 
 export interface LoginInputDTO {
-    email: string;
-    nickname?:string;
+    emailNick:string;
     password: string;
 }
 
