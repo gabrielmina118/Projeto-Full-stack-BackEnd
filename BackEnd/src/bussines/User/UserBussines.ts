@@ -30,22 +30,24 @@ class UserBussines {
         return acessToken;
     }
 
-    async followPerson(token: string, followPerson: string) {
-        
+    async getFeed(token: string) {
+
         if (!token) {
             throw new MissingToken()
         }
 
         const resultToken = this.authenticator.getData(token);
-        const followToken = this.authenticator.getData(followPerson);
         if (!resultToken) {
             throw new Error()
         }
-        console.log(resultToken.id);
-        console.log(followToken.id);
-        
-        
+
+        const feeds = new UserDatabase();
+
+        const allFeeds = await feeds.getFeeds(resultToken.id);
+
+        return allFeeds;
     }
+
 
     async loginUser(input: LoginInputDTO) {
 

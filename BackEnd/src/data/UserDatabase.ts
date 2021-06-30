@@ -28,20 +28,37 @@ export class UserDatabase extends BaseDatabase {
             throw new Error(error.sqlMessage || error.message);
         }
     }
-
-    public async getUser(emailNick:string):Promise<User>{
-        
-        const result = await this.getConnection()
-        .select("*")
-        .from(UserDatabase.TABLE_NAME)
-        .where({nickname:emailNick})
-        .orWhere({email:emailNick})
-
-        if (!result[0]) {
-            throw new Error(` Couldn't find user with this '${emailNick}' `)
+    public async getFeeds(token: string): Promise<[]> {
+        try {
+            const result = await this.getConnection().raw(`
+                select USUARIO_ECOMMERCE.nickname  , USUARIO_IMAGE.file_photo from FOLLOW inner join USUARIO_ECOMMERCE on FOLLOW.person_followed_id = USUARIO_ECOMMERCE.id
+                inner join USUARIO_IMAGE on USUARIO_ECOMMERCE.id = USUARIO_IMAGE.author
+                where person_follow_id = "${token}";
+            `)
+            return result[0]
+            
+        } catch (error) {
+            throw new Error(error.sqlMessage || error.message);
         }
+    }
 
-        return User.toUserModel(result[0]);
+    public async getUser(emailNick: string): Promise<User> {
+
+        try {
+            const result = await this.getConnection()
+                .select("*")
+                .from(UserDatabase.TABLE_NAME)
+                .where({ nickname: emailNick })
+                .orWhere({ email: emailNick })
+
+            if (!result[0]) {
+                throw new Error(` Couldn't find user with this '${emailNick}' `)
+            }
+
+            return User.toUserModel(result[0]);
+        } catch (error) {
+            throw new Error(error.sqlMessage || error.message);
+        }
     }
 
 }
