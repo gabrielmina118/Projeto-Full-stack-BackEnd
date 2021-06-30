@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import  ImageBussines  from "../../bussines/Image/ImageBussines";
 import { BaseDatabase } from "../../data/BaseDatabse";
 import { ImageInputDTO } from "../../model/Image";
+
 class ImageController {
 
     async createImage(req: Request, res: Response) {

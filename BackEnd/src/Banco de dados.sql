@@ -1,5 +1,5 @@
 use `cruz-2114519-gabriel-silva`;
-select * from USUARIO_ECOMMERCE;
+
 CREATE TABLE IF NOT EXISTS USUARIO_ECOMMERCE (
   id VARCHAR(255) PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -14,7 +14,8 @@ CREATE TABLE IF NOT EXISTS USUARIO_IMAGE(
 	 subtitle VARCHAR(255) NOT NULL,
 	 author VARCHAR(255) NOT NULL,
 	 data_criacao date not null,
-	 file_photo VARCHAR(255) NOT NULL
+	 file_photo VARCHAR(255) NOT NULL,
+     tags_name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS TAGS(
@@ -22,11 +23,14 @@ CREATE TABLE IF NOT EXISTS TAGS(
 	 tag_name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS TAGS_USUARIO_IMAGE(
-	tag_id VARCHAR(255)  not null,
-    usuario_image_id VARCHAR(255)  not null,
-    primary key (tag_id,usuario_image_id) ,
-    foreign key(tag_id) references TAGS(id),
-    foreign key(usuario_image_id) references USUARIO_IMAGE(id)
-)
+CREATE TABLE IF NOT EXISTS FOLLOW(
+	person_follow_id varchar(255) not null,
+    person_followed_id varchar(255) not null,
+    primary key(person_follow_id,person_followed_id),
+    foreign key (person_follow_id) references USUARIO_ECOMMERCE(id),
+    foreign key (person_followed_id) references USUARIO_ECOMMERCE(id)
+);
+
+
+
 

@@ -5,7 +5,7 @@ export class ImageDatabase extends BaseDatabase {
 
     private static TABLE_IMAGE = "USUARIO_IMAGE";
     private static TABLE_TAG = "TAGS";
-    private static TAGS_USUARIO_IMAGE = "TAGS_USUARIO_IMAGE";
+    
 
     public async createImage(
         id: string,

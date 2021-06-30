@@ -25,6 +25,19 @@ class UserController {
         }
     }
 
+    async feed(req: Request, res: Response){
+        try {
+            const token = req.headers.authorization!;
+
+            const feeds = await UserBussines.getFeed(token);
+            res.status(200).send({feeds})
+        } catch (error) {
+            res.status(error.statusCode || 400).send({ error: error.message });
+        } finally {
+            await BaseDatabase.destroyConnection();
+        }
+    }
+
     async login(req: Request, res: Response) {
         try {
             let email = "";
@@ -37,7 +50,7 @@ class UserController {
             } else {
                 nickname = emailOrNick;
             }
-           
+            
             
             const emailNick = (email || nickname) as string
             
