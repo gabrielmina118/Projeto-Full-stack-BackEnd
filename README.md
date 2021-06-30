@@ -3,15 +3,20 @@
 ### - Node.js
 ### - MySql
 
-## BackEnd
+## BackEnd - Endpoints
 
-### :heavy_check_mark: Autenticação
-### :heavy_check_mark: Criação de música ou imagem
-### :heavy_check_mark: Leitura de música ou imagem
+### :heavy_check_mark: Criação de Usuário
+### :heavy_check_mark: Login do usuário
+### :heavy_check_mark: Criação de um Post só com imagem
+### :heavy_check_mark: Criação de uma tag para a imagem
+### :heavy_check_mark: buscar todas as postagens que tem uma determinada TAG
+### :heavy_check_mark: Buscar feed
+  - Este endpoint retorna as postagem somente das pessoas que você segue
+### :heavy_check_mark: Seguir uma pessoa
 
 ## Infraestrutura
 
-### :heavy_check_mark: front: AWS e o Heroku.
-### :heavy_check_mark: back : SURGE
+### :heavy_check_mark: front:  AWS.
+### :heavy_check_mark: back : AWS
 
 ### link trello - https://trello.com/b/UOg2eemv/projeto-full-stack
