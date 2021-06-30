@@ -1,5 +1,6 @@
 import { UserDatabase } from "../../data/UserDatabase";
 import { FieldsNotFoundError } from "../../erro/FieldsNotFoundError";
+import { MissingToken } from "../../erro/MissingToken";
 import { LoginInputDTO, UserInputDTO } from "../../model/User";
 import { Authenticator } from "../../services/Authenticator";
 import { HashManager } from "../../services/HashManager";
@@ -29,23 +30,40 @@ class UserBussines {
         return acessToken;
     }
 
+    async followPerson(token: string, followPerson: string) {
+        
+        if (!token) {
+            throw new MissingToken()
+        }
+
+        const resultToken = this.authenticator.getData(token);
+        const followToken = this.authenticator.getData(followPerson);
+        if (!resultToken) {
+            throw new Error()
+        }
+        console.log(resultToken.id);
+        console.log(followToken.id);
+        
+        
+    }
+
     async loginUser(input: LoginInputDTO) {
-        
-        
+
+
         if (!input.emailNick || !input.password) {
             throw new FieldsNotFoundError();
         }
 
-        const emailAlreadExist = new UserDatabase();
-        const userDB = await emailAlreadExist.getUser(input.emailNick);
+        const loginUser = new UserDatabase();
+        const userDB = await loginUser.getUser(input.emailNick);
 
-        const correcPass = await this.hashmanager.compare(input.password,userDB.getPassword());
+        const correcPass = await this.hashmanager.compare(input.password, userDB.getPassword());
 
         if (!correcPass) {
             throw new Error("Invalid Password!");
         }
 
-        const acessToken = this.authenticator.generateToken({ id:userDB.getId(), role:userDB.getRole() })
+        const acessToken = this.authenticator.generateToken({ id: userDB.getId(), role: userDB.getRole() })
 
         return acessToken;
     }

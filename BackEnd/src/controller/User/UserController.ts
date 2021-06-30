@@ -25,6 +25,7 @@ class UserController {
         }
     }
 
+
     async login(req: Request, res: Response) {
         try {
             let email = "";
@@ -37,7 +38,7 @@ class UserController {
             } else {
                 nickname = emailOrNick;
             }
-           
+            
             
             const emailNick = (email || nickname) as string
             

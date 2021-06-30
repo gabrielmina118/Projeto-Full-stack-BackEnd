@@ -31,9 +31,9 @@ class ImageBussines {
 
 
         const imageDatabase = new ImageDatabase();
-        const tag:string = await imageDatabase.getTag(input.tags_name);
-        
-        await imageDatabase.createImage(id,input.subtitle,autor,input.data_criacao,input.file_photo,tag);
+        const tag: string = await imageDatabase.getTag(input.tags_name);
+
+        await imageDatabase.createImage(id, input.subtitle, autor, input.data_criacao, input.file_photo, tag);
     }
 
     async createTag(name: string, token: string) {
@@ -53,9 +53,9 @@ class ImageBussines {
         const id = this.idGenerator.generate();
 
         const imageDatabase = new ImageDatabase()
-        await imageDatabase.createTag(id,name);
+        await imageDatabase.createTag(id, name);
     }
-    async getTags(name:string,token:string){
+    async getTags(name: string, token: string) {
         if (!name) {
             throw new FieldsNotFoundError()
         }
