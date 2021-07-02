@@ -42,8 +42,18 @@ export class UserDatabase extends BaseDatabase {
         }
     }
 
-    public async getUser(emailNick: string): Promise<User> {
+    public async upadteNewPass(pass:string,email:string):Promise<void>{
+        try {
+            await this.getConnection().raw(`
+                UPDATE ${UserDatabase.TABLE_NAME} SET password = "${pass}" WHERE email = "${email}"
+            `)
+        } catch (error) {
+            throw new Error(error.sqlMessage || error.message);
+        }
+    }
 
+    public async getUser(emailNick: string): Promise<User> {
+        
         try {
             const result = await this.getConnection()
                 .select("*")
