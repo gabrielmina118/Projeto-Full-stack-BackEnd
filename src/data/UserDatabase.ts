@@ -55,7 +55,7 @@ export class UserDatabase extends BaseDatabase {
     public async getAllPerson(id:string):Promise<any>{
         try {
             const result = await this.getConnection().raw(`
-                select id,nickname from USUARIO_ECOMMERCE WHERE id <> ${id};
+                select id,nickname from USUARIO_ECOMMERCE WHERE id <> '${id}';
             `)
             return result[0]
         } catch (error) {
