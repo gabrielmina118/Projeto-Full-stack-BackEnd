@@ -10,3 +10,5 @@ userRouter.post("/signup", userController.signup);
 userRouter.post("/resetpass", userController.resetPass);
 userRouter.post("/login", userController.login);
 userRouter.get("/feed", userController.feed);
+userRouter.get("/all", userController.feedAll);
+

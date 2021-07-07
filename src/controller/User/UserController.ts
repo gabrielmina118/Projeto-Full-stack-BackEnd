@@ -52,6 +52,20 @@ class UserController {
         }
     }
 
+    
+    async feedAll(req: Request, res: Response) {
+        try {
+            const token = req.headers.authorization!;
+
+            const allPersons = await UserBussines.getAllPerson(token);
+            res.status(200).send({ allPersons })
+        } catch (error) {
+            res.status(error.statusCode || 400).send({ error: error.message });
+        } finally {
+            await BaseDatabase.destroyConnection();
+        }
+    }
+
     async login(req: Request, res: Response) {
         try {
             let email = "";

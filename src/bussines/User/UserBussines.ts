@@ -50,6 +50,22 @@ class UserBussines {
 
         return `Enviamos uma nova senha para '${email}'`;
     }
+    async getAllPerson(token:string){
+        if (!token) {
+            throw new MissingToken()
+        }
+
+        const resultToken = this.authenticator.getData(token);
+        if (!resultToken) {
+            throw new Error()
+        }
+
+        const feeds = new UserDatabase();
+
+        const allPersons = await feeds.getAllPerson();
+
+        return allPersons;
+    }
 
     async getFeed(token: string) {
 

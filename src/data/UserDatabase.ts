@@ -52,6 +52,17 @@ export class UserDatabase extends BaseDatabase {
         }
     }
 
+    public async getAllPerson():Promise<any>{
+        try {
+            const result = await this.getConnection().raw(`
+                select id,nickname from USUARIO_ECOMMERCE;
+            `)
+            return result[0]
+        } catch (error) {
+            throw new Error(error.sqlMessage || error.message);  
+        }
+    }
+
     public async getUser(emailNick: string): Promise<User> {
         
         try {
