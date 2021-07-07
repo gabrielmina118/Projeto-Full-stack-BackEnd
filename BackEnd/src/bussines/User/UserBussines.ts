@@ -5,6 +5,8 @@ import { LoginInputDTO, UserInputDTO } from "../../model/User";
 import { Authenticator } from "../../services/Authenticator";
 import { HashManager } from "../../services/HashManager";
 import { IdGenerator } from "../../services/IdGenerator";
+import { Transporter } from "../../services/Transporter";
+import sendEmailToNewPass from "./resetPass";
 
 class UserBussines {
     constructor(
@@ -28,6 +30,25 @@ class UserBussines {
         const acessToken = this.authenticator.generateToken({ id, role: input.role })
 
         return acessToken;
+    }
+
+    async resetPass(email:string):Promise<string>{
+
+        if(!email){
+            throw new FieldsNotFoundError();
+        }
+
+        const emailA = new UserDatabase(); 
+        const emailAlreadExist = await emailA.getUser(email);
+
+        const newPass = "teste123";
+
+        const newHash = await this.hashmanager.hashCreate(newPass);
+        await emailA.upadteNewPass(newHash,emailAlreadExist.getEmail());
+
+        await sendEmailToNewPass(newPass,emailAlreadExist.getEmail(),emailAlreadExist.getName());
+
+        return `Enviamos uma nova senha para '${email}'`;
     }
 
     async getFeed(token: string) {

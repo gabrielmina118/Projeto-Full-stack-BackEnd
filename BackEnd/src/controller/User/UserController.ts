@@ -25,12 +25,26 @@ class UserController {
         }
     }
 
-    async feed(req: Request, res: Response){
+    async resetPass(req: Request, res: Response) {
+        try {
+            const email = req.body.email as string;
+            
+            const message = await UserBussines.resetPass(email)
+
+            res.status(200).send({message})
+        } catch (error) {
+            res.status(error.statusCode || 400).send({ error: error.message });
+        } finally {
+            await BaseDatabase.destroyConnection();
+        }
+    }
+
+    async feed(req: Request, res: Response) {
         try {
             const token = req.headers.authorization!;
 
             const feeds = await UserBussines.getFeed(token);
-            res.status(200).send({feeds})
+            res.status(200).send({ feeds })
         } catch (error) {
             res.status(error.statusCode || 400).send({ error: error.message });
         } finally {
@@ -50,17 +64,17 @@ class UserController {
             } else {
                 nickname = emailOrNick;
             }
-            
-            
+
+
             const emailNick = (email || nickname) as string
-            
+
             const input: LoginInputDTO = {
                 emailNick,
                 password: req.body.password
             }
-            
+
             const token = await UserBussines.loginUser(input)
-           
+
             res.status(200).send({ token });
         } catch (error) {
             res.status(error.statusCode || 400).send({ error: error.message });
@@ -68,5 +82,7 @@ class UserController {
             await BaseDatabase.destroyConnection();
         }
     }
+
+
 }
 export { UserController }

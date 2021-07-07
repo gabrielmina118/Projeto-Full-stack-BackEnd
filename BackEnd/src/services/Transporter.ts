@@ -3,16 +3,16 @@ import dotenv from 'dotenv'
 
 dotenv.config();
 
-export class Transporter{
+export class Transporter {
     public transporter = nodemailer.createTransport({
-        host:"smtp.gmail.com",
-        port:587,
-        secure:false,
-        auth:{
-            user:process.env.NODEMAILER_USER,
-            pass:process.env.NODEMAILER_PASS
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false,
+        auth: {
+            user: process.env.NODEMAILER_USER,
+            pass: process.env.NODEMAILER_PASS
         },
-        tls:{ciphers:"SSLv3"}
+        tls: { ciphers: "SSLv3" }
     })
 }
 /*
@@ -37,7 +37,7 @@ export default async function PassReset(
             res.statusCode = 400;
             throw new Error("Email não cadastrado!!")
         }
-    
+
 
         const characters = "abcdefABCDEF12345!?/[]{}"
         let newPass = "";

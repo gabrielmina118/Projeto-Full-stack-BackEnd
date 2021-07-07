@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node ./src/index.ts",
+    "start": "tsc && node ./build/index.js",
+    "build": "tsc",
     "dev-start": "tsnd --transpile-only --ignore-watch node_modules ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -31,9 +32,8 @@
     "ts-node": "^8.10.2",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.9.6",
-    "uuid": "^8.2.0"
-  },
-  "devDependencies": {
+    "uuid": "^8.2.0",
     "@types/nodemailer": "^6.4.2"
-  }
+  },
+  "devDependencies": {}
 }
