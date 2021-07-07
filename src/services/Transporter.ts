@@ -7,6 +7,7 @@ export class Transporter {
     public transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 587,
+        ignoreTLS: false,
         secure: false,
         auth: {
             user: process.env.NODEMAILER_USER,

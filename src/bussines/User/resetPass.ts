@@ -12,7 +12,7 @@ export default async function sendEmailToNewPass(pass:string,email:string,name:s
         from: `<${process.env.NODEMAILER_USER}>`,
         to: email,
         subject: `Olá ${name} , Somos da INSTALAB e estamos enviando sua nova senha, como solicitado !`,
-        text: `Esta é a sua nova senha : ${pass}. Use-a com cuidade`,
+        text: `Esta é a sua nova senha : ${pass}. Use-a com cuidado`,
         html: `<p>Esta é a sua nova senha : <strong>${pass}</strong>. Use-a com cuidade .</p>`
     })
 
