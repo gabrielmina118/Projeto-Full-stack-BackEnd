@@ -11,6 +11,6 @@ app.use("/user", userRouter);
 app.use("/image",imageRouter);
 app.use("/follow",followRouter);
 
-app.listen(3003, () => {
+app.listen(process.env.PORT || 3003, () => {
   console.log(`Servidor rodando em http://localhost:3003`);
 });
