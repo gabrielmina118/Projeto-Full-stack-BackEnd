@@ -59,10 +59,10 @@ class UserBussines {
         if (!resultToken) {
             throw new Error()
         }
-
+        
         const feeds = new UserDatabase();
 
-        const allPersons = await feeds.getAllPerson();
+        const allPersons = await feeds.getAllPerson(resultToken.id);
 
         return allPersons;
     }
