@@ -24,13 +24,12 @@ CREATE TABLE IF NOT EXISTS TAGS(
 );
 
 CREATE TABLE IF NOT EXISTS FOLLOW(
-	person_follow_id varchar(255) not null,
+	  person_follow_id varchar(255) not null,
     person_followed_id varchar(255) not null,
     primary key(person_follow_id,person_followed_id),
     foreign key (person_follow_id) references USUARIO_ECOMMERCE(id),
     foreign key (person_followed_id) references USUARIO_ECOMMERCE(id)
 );
-
 
 
 

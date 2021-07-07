@@ -28,7 +28,7 @@ export class UserDatabase extends BaseDatabase {
             throw new Error(error.sqlMessage || error.message);
         }
     }
-    public async getFeeds(token: string): Promise<[]> {
+    public  async getFeeds(token: string): Promise<[]> {
         try {
             const result = await this.getConnection().raw(`
                 select USUARIO_ECOMMERCE.nickname  , USUARIO_IMAGE.file_photo from FOLLOW inner join USUARIO_ECOMMERCE on FOLLOW.person_followed_id = USUARIO_ECOMMERCE.id
