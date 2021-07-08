@@ -7,4 +7,5 @@ export const followRouter = express.Router();
 const followController = new FollowController();
 
 followRouter.post("/followPerson", followController.follow);
+followRouter.post("/unFollowPerson", followController.UnFollow);
 

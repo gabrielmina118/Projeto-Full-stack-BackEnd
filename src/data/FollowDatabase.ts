@@ -20,4 +20,17 @@ export class FollowDatabase extends BaseDatabase {
         }
     }
 
+    public async removeFollow(
+        idToken: string,
+        idFollow: string
+    ): Promise<void> {
+        try {
+            await this.getConnection().raw(`
+            delete from FOLLOW where person_followed_id = '${idFollow}' and person_follow_id = '${idToken}'
+            `)
+        } catch (error) {
+            throw new Error(error.sqlMessage || error.message);
+        }
+    }
+
 }
