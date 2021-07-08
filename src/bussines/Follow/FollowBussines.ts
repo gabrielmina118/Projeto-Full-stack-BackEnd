@@ -1,4 +1,5 @@
 import { FollowDatabase } from "../../data/FollowDatabase";
+import { FieldsNotFoundError } from "../../erro/FieldsNotFoundError";
 import { MissingToken } from "../../erro/MissingToken";
 import { Authenticator } from "../../services/Authenticator";
 
@@ -10,7 +11,11 @@ class FollowBussines {
 
     async followPerson(token: string, idFollow: string) {
 
-        if (!token || !idFollow) {
+        if(!idFollow){
+            throw new FieldsNotFoundError()
+        }
+
+        if (!token) {
             throw new MissingToken()
         }
 
