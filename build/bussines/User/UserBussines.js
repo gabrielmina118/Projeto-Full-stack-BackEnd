@@ -52,6 +52,20 @@ class UserBussines {
             return `Enviamos uma nova senha para '${email}'`;
         });
     }
+    getAllPerson(token) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!token) {
+                throw new MissingToken_1.MissingToken();
+            }
+            const resultToken = this.authenticator.getData(token);
+            if (!resultToken) {
+                throw new Error();
+            }
+            const feeds = new UserDatabase_1.UserDatabase();
+            const allPersons = yield feeds.getAllPerson(resultToken.id);
+            return allPersons;
+        });
+    }
     getFeed(token) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!token) {

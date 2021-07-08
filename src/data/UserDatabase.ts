@@ -28,7 +28,7 @@ export class UserDatabase extends BaseDatabase {
             throw new Error(error.sqlMessage || error.message);
         }
     }
-    public  async getFeeds(token: string): Promise<[]> {
+    public async getFeeds(token: string): Promise<[]> {
         try {
             const result = await this.getConnection().raw(`
                 select USUARIO_ECOMMERCE.nickname  , USUARIO_IMAGE.file_photo from FOLLOW inner join USUARIO_ECOMMERCE on FOLLOW.person_followed_id = USUARIO_ECOMMERCE.id
@@ -36,13 +36,13 @@ export class UserDatabase extends BaseDatabase {
                 where person_follow_id = "${token}";
             `)
             return result[0]
-            
+
         } catch (error) {
             throw new Error(error.sqlMessage || error.message);
         }
     }
 
-    public async upadteNewPass(pass:string,email:string):Promise<void>{
+    public async upadteNewPass(pass: string, email: string): Promise<void> {
         try {
             await this.getConnection().raw(`
                 UPDATE ${UserDatabase.TABLE_NAME} SET password = "${pass}" WHERE email = "${email}"
@@ -52,19 +52,30 @@ export class UserDatabase extends BaseDatabase {
         }
     }
 
-    public async getAllPerson(id:string):Promise<any>{
+    public async getAllPersonFollows(id: string): Promise<any> {
+        try {
+            const result = await this.getConnection().raw(`
+            select person_followed_id from FOLLOW where person_follow_id='${id}';
+            `)
+            return result[0]
+        } catch (error) {
+            throw new Error(error.sqlMessage || error.message);
+        }
+    }
+
+    public async getAllPerson(id: string): Promise<any> {
         try {
             const result = await this.getConnection().raw(`
                 select id,nickname from USUARIO_ECOMMERCE WHERE id <> '${id}';
             `)
             return result[0]
         } catch (error) {
-            throw new Error(error.sqlMessage || error.message);  
+            throw new Error(error.sqlMessage || error.message);
         }
     }
 
     public async getUser(emailNick: string): Promise<User> {
-        
+
         try {
             const result = await this.getConnection()
                 .select("*")

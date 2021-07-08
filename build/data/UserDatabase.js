@@ -59,6 +59,19 @@ class UserDatabase extends BaseDatabse_1.BaseDatabase {
             }
         });
     }
+    getAllPerson(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const result = yield this.getConnection().raw(`
+                select id,nickname from USUARIO_ECOMMERCE WHERE id <> '${id}';
+            `);
+                return result[0];
+            }
+            catch (error) {
+                throw new Error(error.sqlMessage || error.message);
+            }
+        });
+    }
     getUser(emailNick) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

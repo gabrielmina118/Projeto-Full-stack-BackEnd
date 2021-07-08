@@ -35,7 +35,7 @@ class User {
             case "ADMIN":
                 return UserRole.ADMIN;
             default:
-                throw new Error("Invalid user role, must be 'NORMAL' or 'ADMIN' with uppercase");
+                return UserRole.NORMAL;
         }
     }
     static toUserModel(user) {

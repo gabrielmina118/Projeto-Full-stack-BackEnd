@@ -21,8 +21,24 @@ class FollowController {
             try {
                 const token = req.headers.authorization;
                 const idFollow = req.body.idFollow;
-                yield FollowBussines_1.default.followPerson(token, idFollow);
-                res.status(200).send("Follow sucessefully");
+                const message = yield FollowBussines_1.default.followPerson(token, idFollow);
+                res.status(200).send({ message });
+            }
+            catch (error) {
+                res.status(error.statusCode || 400).send({ error: error.message });
+            }
+            finally {
+                yield BaseDatabse_1.BaseDatabase.destroyConnection();
+            }
+        });
+    }
+    UnFollow(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const token = req.headers.authorization;
+                const idUnFollow = req.body.idUnFollow;
+                const message = yield FollowBussines_1.default.UnfollowPerson(token, idUnFollow);
+                res.status(200).send({ message });
             }
             catch (error) {
                 res.status(error.statusCode || 400).send({ error: error.message });

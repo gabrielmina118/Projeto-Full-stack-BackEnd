@@ -68,6 +68,21 @@ class UserController {
             }
         });
     }
+    feedAll(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const token = req.headers.authorization;
+                const allPersons = yield UserBussines_1.default.getAllPerson(token);
+                res.status(200).send({ allPersons });
+            }
+            catch (error) {
+                res.status(error.statusCode || 400).send({ error: error.message });
+            }
+            finally {
+                yield BaseDatabse_1.BaseDatabase.destroyConnection();
+            }
+        });
+    }
     login(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

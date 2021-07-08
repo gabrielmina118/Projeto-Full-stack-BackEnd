@@ -32,25 +32,26 @@ class UserBussines {
         return acessToken;
     }
 
-    async resetPass(email:string):Promise<string>{
+    async resetPass(email: string): Promise<string> {
 
-        if(!email){
+        if (!email) {
             throw new FieldsNotFoundError();
         }
 
-        const emailA = new UserDatabase(); 
+        const emailA = new UserDatabase();
         const emailAlreadExist = await emailA.getUser(email);
 
         const newPass = "teste123";
 
         const newHash = await this.hashmanager.hashCreate(newPass);
-        await emailA.upadteNewPass(newHash,emailAlreadExist.getEmail());
+        await emailA.upadteNewPass(newHash, emailAlreadExist.getEmail());
 
-        await sendEmailToNewPass(newPass,emailAlreadExist.getEmail(),emailAlreadExist.getName());
+        await sendEmailToNewPass(newPass, emailAlreadExist.getEmail(), emailAlreadExist.getName());
 
         return `Enviamos uma nova senha para '${email}'`;
     }
-    async getAllPerson(token:string){
+
+    async getPersonFollows(token: string) {
         if (!token) {
             throw new MissingToken()
         }
@@ -59,7 +60,24 @@ class UserBussines {
         if (!resultToken) {
             throw new Error()
         }
-        
+
+        const personFollows = new UserDatabase();
+
+        const allPersonsFollows = await personFollows.getAllPersonFollows(resultToken.id);
+
+        return allPersonsFollows;
+    }
+
+    async getAllPerson(token: string) {
+        if (!token) {
+            throw new MissingToken()
+        }
+
+        const resultToken = this.authenticator.getData(token);
+        if (!resultToken) {
+            throw new Error()
+        }
+
         const feeds = new UserDatabase();
 
         const allPersons = await feeds.getAllPerson(resultToken.id);

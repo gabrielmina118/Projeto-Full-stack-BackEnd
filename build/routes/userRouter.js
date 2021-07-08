@@ -12,4 +12,5 @@ exports.userRouter.post("/signup", userController.signup);
 exports.userRouter.post("/resetpass", userController.resetPass);
 exports.userRouter.post("/login", userController.login);
 exports.userRouter.get("/feed", userController.feed);
+exports.userRouter.get("/all", userController.feedAll);
 //# sourceMappingURL=userRouter.js.map

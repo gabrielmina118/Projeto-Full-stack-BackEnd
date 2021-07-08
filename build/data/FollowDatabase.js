@@ -27,6 +27,18 @@ class FollowDatabase extends BaseDatabse_1.BaseDatabase {
             }
         });
     }
+    removeFollow(idToken, idFollow) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield this.getConnection().raw(`
+            delete from FOLLOW where person_followed_id = '${idFollow}' and person_follow_id = '${idToken}'
+            `);
+            }
+            catch (error) {
+                throw new Error(error.sqlMessage || error.message);
+            }
+        });
+    }
 }
 exports.FollowDatabase = FollowDatabase;
 FollowDatabase.FOLLOW = "FOLLOW";

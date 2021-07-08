@@ -9,4 +9,5 @@ const FollowController_1 = require("../controller/Follow/FollowController");
 exports.followRouter = express_1.default.Router();
 const followController = new FollowController_1.FollowController();
 exports.followRouter.post("/followPerson", followController.follow);
+exports.followRouter.post("/unFollowPerson", followController.UnFollow);
 //# sourceMappingURL=followRouter.js.map

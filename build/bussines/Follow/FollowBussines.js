@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const FollowDatabase_1 = require("../../data/FollowDatabase");
+const FieldsNotFoundError_1 = require("../../erro/FieldsNotFoundError");
 const MissingToken_1 = require("../../erro/MissingToken");
 const Authenticator_1 = require("../../services/Authenticator");
 class FollowBussines {
@@ -18,7 +19,10 @@ class FollowBussines {
     }
     followPerson(token, idFollow) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (!token || !idFollow) {
+            if (!idFollow) {
+                throw new FieldsNotFoundError_1.FieldsNotFoundError();
+            }
+            if (!token) {
                 throw new MissingToken_1.MissingToken();
             }
             const resultToken = this.authenticator.getData(token);
@@ -27,6 +31,24 @@ class FollowBussines {
             }
             const followDatabase = new FollowDatabase_1.FollowDatabase();
             yield followDatabase.insertFollow(resultToken.id, idFollow);
+            return "Follow sucessefully";
+        });
+    }
+    UnfollowPerson(token, idUnFollow) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!idUnFollow) {
+                throw new FieldsNotFoundError_1.FieldsNotFoundError();
+            }
+            if (!token) {
+                throw new MissingToken_1.MissingToken();
+            }
+            const resultToken = this.authenticator.getData(token);
+            if (!resultToken) {
+                throw new Error();
+            }
+            const followDatabase = new FollowDatabase_1.FollowDatabase();
+            yield followDatabase.removeFollow(resultToken.id, idUnFollow);
+            return "UnFollow Person sucessefully";
         });
     }
 }

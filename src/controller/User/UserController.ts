@@ -39,6 +39,19 @@ class UserController {
         }
     }
 
+    async personFollow(req: Request, res: Response){
+        try {
+            const token = req.headers.authorization!;
+
+            const personFollows = await UserBussines.getPersonFollows(token);
+            res.status(200).send({ personFollows })
+        } catch (error) {
+            res.status(error.statusCode || 400).send({ error: error.message });
+        } finally {
+            await BaseDatabase.destroyConnection();
+        }
+    }
+
     async feed(req: Request, res: Response) {
         try {
             const token = req.headers.authorization!;
@@ -71,6 +84,7 @@ class UserController {
             let email = "";
             let nickname = "";
 
+            // request 
             const emailOrNick = req.body.emailOrNick;
 
             if (!(emailOrNick.indexOf("@") === -1)) {
@@ -80,7 +94,7 @@ class UserController {
             }
 
 
-            const emailNick = (email || nickname) as string
+            const emailNick = (email || nickname) as string;
 
             const input: LoginInputDTO = {
                 emailNick,
