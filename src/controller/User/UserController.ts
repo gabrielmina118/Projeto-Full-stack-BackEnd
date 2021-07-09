@@ -68,9 +68,11 @@ class UserController {
     async personProfile(req: Request, res: Response) {
         try {
             const token = req.headers.authorization!;
+            const id = req.params.id as string;
 
-            const personProfile = await UserBussines.getpersonProfile(token);
-            res.status(200).send({ personProfile })
+            const [personProfile,personPhotosFile] = await UserBussines.getpersonProfile(token,id);
+
+            res.status(200).send({ personProfile ,personPhotosFile})
         } catch (error) {
             res.status(error.statusCode || 400).send({ error: error.message });
         } finally {

@@ -63,10 +63,24 @@ export class UserDatabase extends BaseDatabase {
         }
     }
 
-    public async getPerson(id:string):Promise<any>{
+    public async getPerson(id: string): Promise<any> {
         try {
             const result = await this.getConnection().raw(`
-                select id, name,nickname from USUARIO_ECOMMERCE WHERE id='${id}';
+            select USUARIO_ECOMMERCE.name , USUARIO_ECOMMERCE.nickname from USUARIO_ECOMMERCE
+            WHERE USUARIO_ECOMMERCE.id ='${id}';
+            `)
+            return result[0]
+        } catch (error) {
+            throw new Error(error.sqlMessage || error.message);
+        }
+    }
+
+    public async getPersonPhotos(id: string): Promise<any> {
+        try {
+            const result = await this.getConnection().raw(`
+            select USUARIO_IMAGE.file_photo from USUARIO_ECOMMERCE
+            inner join USUARIO_IMAGE on
+            USUARIO_IMAGE.author ='${id}' and USUARIO_ECOMMERCE.id ='${id}';
             `)
             return result[0]
         } catch (error) {

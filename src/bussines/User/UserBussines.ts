@@ -69,7 +69,7 @@ class UserBussines {
     }
 
 
-    async getpersonProfile(token:string){
+    async getpersonProfile(token:string, id:string){
         if (!token) {
             throw new MissingToken()
         }
@@ -81,9 +81,13 @@ class UserBussines {
 
         const personProfile = new UserDatabase();
 
-        const profile = await personProfile.getPerson(resultToken.id);
+        const profile = await personProfile.getPerson(id);
+        const profile_photos = await personProfile.getPersonPhotos(id)
 
-        return profile;
+        console.log(profile);
+        console.log(profile_photos);
+        
+        return [profile[0],profile_photos];
     }
 
     async getAllPerson(token: string) {

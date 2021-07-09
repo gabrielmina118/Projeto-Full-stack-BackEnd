@@ -12,5 +12,5 @@ userRouter.post("/login", userController.login);
 userRouter.get("/feed", userController.feed);
 userRouter.get("/personFollow", userController.personFollow);
 userRouter.get("/all", userController.feedAll);
-userRouter.get("/getPersonProfile", userController.personProfile);
+userRouter.get("/getPersonProfile/:id", userController.personProfile);
 
