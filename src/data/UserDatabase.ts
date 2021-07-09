@@ -63,6 +63,17 @@ export class UserDatabase extends BaseDatabase {
         }
     }
 
+    public async getPerson(id:string):Promise<any>{
+        try {
+            const result = await this.getConnection().raw(`
+                select id, name,nickname from USUARIO_ECOMMERCE WHERE id='${id}';
+            `)
+            return result[0]
+        } catch (error) {
+            throw new Error(error.sqlMessage || error.message);
+        }
+    }
+
     public async getAllPerson(id: string): Promise<any> {
         try {
             const result = await this.getConnection().raw(`

@@ -68,6 +68,24 @@ class UserBussines {
         return allPersonsFollows;
     }
 
+
+    async getpersonProfile(token:string){
+        if (!token) {
+            throw new MissingToken()
+        }
+
+        const resultToken = this.authenticator.getData(token);
+        if (!resultToken) {
+            throw new Error()
+        }
+
+        const personProfile = new UserDatabase();
+
+        const profile = await personProfile.getPerson(resultToken.id);
+
+        return profile;
+    }
+
     async getAllPerson(token: string) {
         if (!token) {
             throw new MissingToken()

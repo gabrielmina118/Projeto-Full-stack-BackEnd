@@ -65,6 +65,18 @@ class UserController {
         }
     }
 
+    async personProfile(req: Request, res: Response) {
+        try {
+            const token = req.headers.authorization!;
+
+            const personProfile = await UserBussines.getpersonProfile(token);
+            res.status(200).send({ personProfile })
+        } catch (error) {
+            res.status(error.statusCode || 400).send({ error: error.message });
+        } finally {
+            await BaseDatabase.destroyConnection();
+        }
+    }
     
     async feedAll(req: Request, res: Response) {
         try {
