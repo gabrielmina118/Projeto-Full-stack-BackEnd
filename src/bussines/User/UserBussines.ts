@@ -118,11 +118,12 @@ class UserBussines {
             throw new Error()
         }
 
+    
         const feeds = new UserDatabase();
 
         const allFeeds = await feeds.getFeeds(resultToken.id);
 
-        return allFeeds;
+        return [allFeeds,resultToken.id];
     }
 
 

@@ -56,8 +56,8 @@ class UserController {
         try {
             const token = req.headers.authorization!;
 
-            const feeds = await UserBussines.getFeed(token);
-            res.status(200).send({ feeds })
+            const [feeds,tokenId] = await UserBussines.getFeed(token);
+            res.status(200).send({ feeds , tokenId})
         } catch (error) {
             res.status(error.statusCode || 400).send({ error: error.message });
         } finally {

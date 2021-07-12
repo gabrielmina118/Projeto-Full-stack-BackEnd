@@ -55,6 +55,15 @@ class ImageBussines {
         const imageDatabase = new ImageDatabase()
         await imageDatabase.createTag(id, name);
     }
+
+
+    async allTags(){
+        const imageDatabase = new ImageDatabase()
+        const allTagsPhoto = await imageDatabase.allTags();
+
+        return allTagsPhoto;
+    }
+
     async getTags(name: string, token: string) {
         if (!name) {
             throw new FieldsNotFoundError()

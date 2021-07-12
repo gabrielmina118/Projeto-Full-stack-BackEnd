@@ -5,7 +5,7 @@ export class ImageDatabase extends BaseDatabase {
 
     private static TABLE_IMAGE = "USUARIO_IMAGE";
     private static TABLE_TAG = "TAGS";
-    
+
 
     public async createImage(
         id: string,
@@ -58,6 +58,18 @@ export class ImageDatabase extends BaseDatabase {
                     tag_name: name
                 })
                 .into(ImageDatabase.TABLE_TAG);
+        } catch (error) {
+            throw new Error(error.sqlMessage || error.message);
+        }
+    }
+
+    public async allTags(): Promise<any[]> {
+        try {
+            const result = await this.getConnection()
+                .select("tag_name")
+                .from(ImageDatabase.TABLE_TAG)
+
+            return result;
         } catch (error) {
             throw new Error(error.sqlMessage || error.message);
         }

@@ -38,6 +38,20 @@ class ImageController {
             await BaseDatabase.destroyConnection();
         }
     }
+
+    async getAllTags(req:Request,res:Response){
+        try {
+            
+            const allTags = await ImageBussines.allTags();
+
+            res.status(200).send({allTags})
+        } catch (error) {
+            res.status(error.statusCode || 400).send({ error: error.message });
+        } finally {
+            await BaseDatabase.destroyConnection();
+        }
+    }
+
     async getTags(req:Request,res:Response){
         try {
             const token = req.headers.authorization as string;
