@@ -33,7 +33,7 @@ export class UserDatabase extends BaseDatabase {
     public async getFeeds(token: string): Promise<[]> {
         try {
             const result = await this.getConnection().raw(`
-                select USUARIO_ECOMMERCE.nickname  , USUARIO_IMAGE.file_photo from FOLLOW inner join USUARIO_ECOMMERCE on FOLLOW.person_followed_id = USUARIO_ECOMMERCE.id
+                select USUARIO_ECOMMERCE.nickname  , USUARIO_IMAGE.file_photo , USUARIO_ECOMMERCE.photo_profile from FOLLOW inner join USUARIO_ECOMMERCE on FOLLOW.person_followed_id = USUARIO_ECOMMERCE.id
                 inner join USUARIO_IMAGE on USUARIO_ECOMMERCE.id = USUARIO_IMAGE.author
                 where person_follow_id = "${token}";
             `)
@@ -57,7 +57,9 @@ export class UserDatabase extends BaseDatabase {
     public async getAllPersonFollows(id: string): Promise<any> {
         try {
             const result = await this.getConnection().raw(`
-            select person_followed_id from FOLLOW where person_follow_id='${id}';
+            select person_followed_id , USUARIO_ECOMMERCE.photo_profile from FOLLOW  inner join
+            USUARIO_ECOMMERCE on FOLLOW.person_followed_id = USUARIO_ECOMMERCE.id
+            where person_follow_id='${id}';
             `)
             return result[0]
         } catch (error) {
@@ -68,7 +70,7 @@ export class UserDatabase extends BaseDatabase {
     public async getPerson(id: string): Promise<any> {
         try {
             const result = await this.getConnection().raw(`
-            select USUARIO_ECOMMERCE.name , USUARIO_ECOMMERCE.nickname from USUARIO_ECOMMERCE
+            select USUARIO_ECOMMERCE.name , USUARIO_ECOMMERCE.nickname , USUARIO_ECOMMERCE.photo_profile from USUARIO_ECOMMERCE
             WHERE USUARIO_ECOMMERCE.id ='${id}';
             `)
             return result[0]
@@ -93,7 +95,7 @@ export class UserDatabase extends BaseDatabase {
     public async getAllPerson(id: string): Promise<any> {
         try {
             const result = await this.getConnection().raw(`
-                select id,nickname from USUARIO_ECOMMERCE WHERE id <> '${id}';
+                select id,nickname , photo_profile from USUARIO_ECOMMERCE WHERE id <> '${id}';
             `)
             return result[0]
         } catch (error) {

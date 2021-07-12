@@ -84,8 +84,6 @@ class UserBussines {
         const profile = await personProfile.getPerson(id);
         const profile_photos = await personProfile.getPersonPhotos(id)
 
-        console.log(profile);
-        console.log(profile_photos);
         
         return [profile[0],profile_photos];
     }
