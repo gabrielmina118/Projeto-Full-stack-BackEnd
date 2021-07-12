@@ -69,7 +69,7 @@ class UserBussines {
     }
 
 
-    async getpersonProfile(token:string, id:string){
+    async getpersonProfile(token: string, id: string) {
         if (!token) {
             throw new MissingToken()
         }
@@ -84,8 +84,8 @@ class UserBussines {
         const profile = await personProfile.getPerson(id);
         const profile_photos = await personProfile.getPersonPhotos(id)
 
-        
-        return [profile[0],profile_photos];
+
+        return [profile[0], profile_photos];
     }
 
     async getAllPerson(token: string) {
@@ -105,6 +105,24 @@ class UserBussines {
         return allPersons;
     }
 
+    async updatePhoto(photo: string, token: string) {
+        if (!token) {
+            throw new MissingToken()
+        }
+
+        const resultToken = this.authenticator.getData(token);
+        if (!resultToken) {
+            throw new Error()
+        }
+
+        const userPhoto = new UserDatabase();
+
+        await userPhoto.updateImage(photo,resultToken.id);
+
+        return "Photo updated sucessefuly!";
+    }
+
+
     async getFeed(token: string) {
 
         if (!token) {
@@ -116,12 +134,12 @@ class UserBussines {
             throw new Error()
         }
 
-    
+
         const feeds = new UserDatabase();
 
         const allFeeds = await feeds.getFeeds(resultToken.id);
 
-        return [allFeeds,resultToken.id];
+        return [allFeeds, resultToken.id];
     }
 
 

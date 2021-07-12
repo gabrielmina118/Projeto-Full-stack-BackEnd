@@ -92,6 +92,16 @@ export class UserDatabase extends BaseDatabase {
         }
     }
 
+    public async updateImage(photo:string,id:string):Promise<void>{
+        try {
+            await this.getConnection().raw(`
+             UPDATE USUARIO_ECOMMERCE SET photo_profile= '${photo}' WHERE id='${id}';
+            `)
+        } catch (error) {
+            throw new Error(error.sqlMessage || error.message);
+        }
+    }
+
     public async getAllPerson(id: string): Promise<any> {
         try {
             const result = await this.getConnection().raw(`

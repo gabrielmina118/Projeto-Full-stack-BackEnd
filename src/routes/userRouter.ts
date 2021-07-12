@@ -9,6 +9,7 @@ const userController = new UserController();
 userRouter.post("/signup", userController.signup);
 userRouter.post("/resetpass", userController.resetPass);
 userRouter.post("/login", userController.login);
+userRouter.post("/updatePhotoProfile",userController.alterPhoto)
 userRouter.get("/feed", userController.feed);
 userRouter.get("/personFollow", userController.personFollow);
 userRouter.get("/all", userController.feedAll);

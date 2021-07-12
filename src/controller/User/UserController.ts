@@ -94,6 +94,20 @@ class UserController {
         }
     }
 
+    async alterPhoto(req: Request, res: Response) {
+        try {
+            const photo = req.body.photo as string;
+            const token = req.headers.authorization!;
+
+            const message = await UserBussines.updatePhoto(photo,token);
+            res.status(200).send({message})
+        } catch (error) {
+            res.status(error.statusCode || 400).send({ error: error.message });
+        } finally {
+            await BaseDatabase.destroyConnection();
+        }
+    }
+
     async login(req: Request, res: Response) {
         try {
             let email = "";
