@@ -85,7 +85,7 @@ export class ImageDatabase extends BaseDatabase {
                 .innerJoin("TAGS", "USUARIO_IMAGE.tags_name", "=", "TAGS.id")
                 .where("TAGS.tag_name", `${name}`)
             if (!result.length) {
-                throw new Error(`cant not found tag like '${name}'`)
+                throw new Error(`cant not found tag like '${name}' or just created and there is no photo`)
             }
             return result;
         } catch (error) {
