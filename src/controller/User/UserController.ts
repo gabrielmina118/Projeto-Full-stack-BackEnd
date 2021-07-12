@@ -12,7 +12,8 @@ class UserController {
                 email: req.body.email,
                 nickname: req.body.nickname,
                 password: req.body.password,
-                role: User.stringToUserRole(req.body.role)
+                role: User.stringToUserRole(req.body.role),
+                userImage:req.body.userImage
             }
 
             const token = await UserBussines.createUser(input)

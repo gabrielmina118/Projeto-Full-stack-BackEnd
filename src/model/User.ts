@@ -54,6 +54,7 @@ export interface UserInputDTO {
     nickname: string;
     password: string;
     role: string;
+    userImage:string;
 }
 
 export interface LoginInputDTO {

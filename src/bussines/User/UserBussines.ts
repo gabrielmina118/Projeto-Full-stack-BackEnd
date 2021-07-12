@@ -17,7 +17,7 @@ class UserBussines {
 
     async createUser(input: UserInputDTO) {
 
-        if (!input.name || !input.nickname || !input.email || !input.password || !input.role) {
+        if (!input.name || !input.nickname || !input.email || !input.password || !input.role || !input.userImage) {
             throw new FieldsNotFoundError()
         }
 
@@ -25,7 +25,7 @@ class UserBussines {
         const id = this.idGenerator.generate();
 
         const userData = new UserDatabase();
-        await userData.createUser(id, input.name, input.nickname, input.email, password, input.role)
+        await userData.createUser(id, input.name, input.nickname, input.email, password, input.role, input.userImage)
 
         const acessToken = this.authenticator.generateToken({ id, role: input.role })
 

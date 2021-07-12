@@ -11,7 +11,8 @@ export class UserDatabase extends BaseDatabase {
         nickname: string,
         email: string,
         password: string,
-        role: string
+        role: string,
+        image:string
     ): Promise<void> {
         try {
             await this.getConnection()
@@ -21,7 +22,8 @@ export class UserDatabase extends BaseDatabase {
                     nickname,
                     email,
                     password,
-                    role
+                    role,
+                    photo_profile: image
                 })
                 .into(UserDatabase.TABLE_NAME);
         } catch (error) {
