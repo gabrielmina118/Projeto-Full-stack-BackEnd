@@ -16,7 +16,6 @@
 
 ## Infraestrutura
 
-### :heavy_check_mark: front:  AWS.
-### :heavy_check_mark: back : AWS
+### :heavy_check_mark: back : HEROKU
 
 ### link trello - https://trello.com/b/UOg2eemv/projeto-full-stack
